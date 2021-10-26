@@ -8,5 +8,7 @@ namespace MicroservicePFR.Domain.Models
         public string userID { get; set; }
         [Key]
         public string articleID { get; set; }
+
+        
     }
 }

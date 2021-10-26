@@ -9,6 +9,7 @@ namespace MicroservicePFR
     {
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<Favourite> Favourite { get; set; }
+        public DbSet<InterestCategory> InterestCategory { get; set; }
         public SqlServerDBContext(DbContextOptions<SqlServerDBContext> options): base(options)
         {
         }
