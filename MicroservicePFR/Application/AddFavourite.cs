@@ -16,8 +16,7 @@ namespace MicroservicePFR.Application
         }
         public FavouriteResponse Add(Favourite favourite) {
             
-                favourite.userID = "2";
-                favourite.articleID = "101";
+                
                 if (!favouriteService.IsAlreadyAdded(favourite))
                 {
                     favouriteRepository.Store(favourite);
@@ -31,5 +30,6 @@ namespace MicroservicePFR.Application
             return response;
               
         }
+        
     }
 }

@@ -6,5 +6,7 @@ namespace MicroservicePFR.Domain.Repository
     {
         public void Store(Favourite favourite);
         public bool IsAlreadyAdded(Favourite favourite);
+        public void Remove(Favourite favourite);
+        public Favourite GetById(string id);
     }
 }

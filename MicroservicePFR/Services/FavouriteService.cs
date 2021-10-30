@@ -7,6 +7,12 @@ public class FavouriteService : IFavouriteService
     public FavouriteService(IFavouriteRepository repo){
         favouriteRepository = repo;
     }
+
+    public Favourite GetFavourite(string id)
+    {
+        return favouriteRepository.GetById(id);
+    }
+
     public bool IsAlreadyAdded(Favourite favourite)
     {
         if(favouriteRepository.IsAlreadyAdded(favourite))
@@ -14,10 +20,15 @@ public class FavouriteService : IFavouriteService
         return false;
     }
 
+    public void Remove(Favourite favourite)
+    {
+        favouriteRepository.Remove(favourite);
+    }
 
     public void Store(Favourite favourite)
     {
         favouriteRepository.Store(favourite);
     }
+    
 
 }

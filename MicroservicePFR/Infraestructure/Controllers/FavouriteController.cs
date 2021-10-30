@@ -3,6 +3,7 @@ using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
 using MicroservicePFR.Infraestructure.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace MicroservicePFR.Infraestructure.Controllers
 {
@@ -30,6 +31,15 @@ namespace MicroservicePFR.Infraestructure.Controllers
             AddFavourite favouriteAction = new AddFavourite(favouriteRepository,favouriteService);
             return favouriteAction.Add(favourite);            
 
+        }
+        [HttpDelete]
+        public FavouriteResponse Delete(string articleId) {
+            
+                RemoveFavourite favouriteAction = new RemoveFavourite(favouriteRepository, favouriteService);
+                return favouriteAction.Remove(articleId);
+            
+            
+            
         }
     }
 }
