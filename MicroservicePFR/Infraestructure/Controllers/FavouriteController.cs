@@ -12,10 +12,12 @@ namespace MicroservicePFR.Infraestructure.Controllers
     {
         private readonly SqlServerDBContext dbContext;
         SqlServerFavouriteRepository favouriteRepository;
+        FavouriteService favouriteService;
 
         public FavouriteController(SqlServerDBContext dbContext) {
             this.dbContext = dbContext;
             favouriteRepository = new SqlServerFavouriteRepository(dbContext);
+            favouriteService = new FavouriteService(favouriteRepository);
         }   
 
         [HttpGet]
@@ -24,11 +26,9 @@ namespace MicroservicePFR.Infraestructure.Controllers
             return "Ok todo funcionando";
         }
         [HttpPost]
-        public void Post(Favourite favourite) {
-            AddFavourite favouriteAction = new AddFavourite(favouriteRepository);
-            favouriteAction.Add(favourite);
-
-            
+        public FavouriteResponse Post(Favourite favourite) {
+            AddFavourite favouriteAction = new AddFavourite(favouriteRepository,favouriteService);
+            return favouriteAction.Add(favourite);            
 
         }
     }

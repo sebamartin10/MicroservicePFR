@@ -1,5 +1,6 @@
 ﻿using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
+using System;
 
 namespace MicroservicePFR.Infraestructure.Repository
 {
@@ -11,9 +12,20 @@ namespace MicroservicePFR.Infraestructure.Repository
         }
         public void Store(Favourite favourite)
         {
-            _dbContext.Add(favourite);
-            _dbContext.SaveChanges();
-
+            
+                _dbContext.Favourite.Add(favourite);
+                _dbContext.SaveChanges();
+            
+        }
+        public bool IsAlreadyAdded(Favourite favourite){
+            
+                var fav = _dbContext.Favourite.Find(favourite.articleID);
+                if (fav != null)
+                    return true;
+                return false;
+            
+            
+            
         }
     }
 }
