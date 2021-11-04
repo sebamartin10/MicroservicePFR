@@ -1,9 +1,11 @@
 ﻿using MicroservicePFR.Application;
+using MicroservicePFR.Domain.DTOs;
 using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
 using MicroservicePFR.Infraestructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace MicroservicePFR.Infraestructure.Controllers
 {
@@ -22,9 +24,11 @@ namespace MicroservicePFR.Infraestructure.Controllers
         }   
 
         [HttpGet]
-        public string Get()
+        public List<UserFavourite> Get()
         {
-            return "Ok todo funcionando";
+            string userId = "1";
+            GetAllFavouritesFromUser getFavouritesAction = new GetAllFavouritesFromUser(favouriteRepository,favouriteService);
+            return getFavouritesAction.GetFavourites(userId); 
         }
         [HttpPost]
         public FavouriteResponse Post(Favourite favourite) {

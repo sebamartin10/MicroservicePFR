@@ -1,11 +1,17 @@
 using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
+using System.Collections.Generic;
 
 public class FavouriteService : IFavouriteService
 {
     private IFavouriteRepository favouriteRepository;
     public FavouriteService(IFavouriteRepository repo){
         favouriteRepository = repo;
+    }
+
+    public List<Favourite> GetAllFavouritesFromUser(string userId)
+    {
+        return favouriteRepository.GetAllUserFavorites(userId);
     }
 
     public Favourite GetFavourite(string id)

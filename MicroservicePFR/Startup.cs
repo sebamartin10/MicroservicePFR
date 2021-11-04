@@ -1,3 +1,6 @@
+using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Infraestructure.Repository;
+using MicroservicePFR.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +30,8 @@ namespace MicroservicePFR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserProfileRepository, SqlServerUserProfileRepository>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddDbContext<SqlServerDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddControllers();
@@ -34,6 +39,7 @@ namespace MicroservicePFR
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroservicePFR", Version = "v1" });
             });
+            
             
         }
 
