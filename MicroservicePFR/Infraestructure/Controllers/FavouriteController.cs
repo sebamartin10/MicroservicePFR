@@ -6,6 +6,7 @@ using MicroservicePFR.Infraestructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MicroservicePFR.Infraestructure.Controllers
 {
@@ -14,21 +15,21 @@ namespace MicroservicePFR.Infraestructure.Controllers
     public class FavouriteController : ControllerBase
     {
         private readonly SqlServerDBContext dbContext;
-        SqlServerFavouriteRepository favouriteRepository;
-        FavouriteService favouriteService;
+        IFavouriteRepository favouriteRepository;
+        IFavouriteService favouriteService;
 
-        public FavouriteController(SqlServerDBContext dbContext) {
+        public FavouriteController(SqlServerDBContext dbContext,IFavouriteService service,IFavouriteRepository repository) {
             this.dbContext = dbContext;
-            favouriteRepository = new SqlServerFavouriteRepository(dbContext);
-            favouriteService = new FavouriteService(favouriteRepository);
+            this.favouriteRepository = repository;
+            this.favouriteService = service;
         }   
 
         [HttpGet]
-        public List<UserFavourite> Get()
+        public async Task<List<FavouriteDTO>> Get()
         {
             string userId = "1";
             GetAllFavouritesFromUser getFavouritesAction = new GetAllFavouritesFromUser(favouriteRepository,favouriteService);
-            return getFavouritesAction.GetFavourites(userId); 
+            return await getFavouritesAction.GetFavourites(userId); 
         }
         [HttpPost]
         public FavouriteResponse Post(Favourite favourite) {

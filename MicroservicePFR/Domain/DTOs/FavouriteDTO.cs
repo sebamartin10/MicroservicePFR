@@ -1,6 +1,6 @@
 ﻿namespace MicroservicePFR.Domain.DTOs
 {
-    public class UserFavourite
+    public class FavouriteDTO
     {
         public string articleId {  get; set; }
         public string articleName { get; set; }

@@ -2,6 +2,7 @@
 using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MicroservicePFR.Application
 {
@@ -13,11 +14,11 @@ namespace MicroservicePFR.Application
             favouriteRepository = repo;
             favouriteService = service;
         }
-        public List<UserFavourite> GetFavourites(string userId) {
-            List<Favourite> favourites = favouriteService.GetAllFavouritesFromUser(userId);
-            List<UserFavourite> userFavourites = new List<UserFavourite>();
+        public async Task<List<FavouriteDTO>> GetFavourites(string userId) {
+            List<Favourite> favourites = await favouriteService.GetAllFavouritesFromUser(userId);
+            List<FavouriteDTO> userFavourites = new List<FavouriteDTO>();
             foreach (var favourite in favourites) {
-                userFavourites.Add(new UserFavourite
+                userFavourites.Add(new FavouriteDTO
                 {
                     articleId = favourite.articleID,
                     articleName= "Name of the article.",

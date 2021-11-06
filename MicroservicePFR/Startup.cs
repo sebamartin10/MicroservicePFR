@@ -32,6 +32,8 @@ namespace MicroservicePFR
         {
             services.AddScoped<IUserProfileRepository, SqlServerUserProfileRepository>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IFavouriteRepository, SqlServerFavouriteRepository>();
+            services.AddScoped<IFavouriteService, FavouriteService>();
             services.AddDbContext<SqlServerDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddControllers();
@@ -39,8 +41,12 @@ namespace MicroservicePFR
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicroservicePFR", Version = "v1" });
             });
+            services.AddHttpClient("Catalog",client => {
+                client.BaseAddress = new Uri("http://localhost:3002");
+            });
             
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
