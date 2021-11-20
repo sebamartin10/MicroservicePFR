@@ -1,33 +1,38 @@
 ﻿using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Services;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace MicroservicePFR.Application
 {
     public class AddFavourite
     {
         IFavouriteService favouriteService;
-        IFavouriteRepository favouriteRepository;
+        IAuthService authService;
+    
         FavouriteResponse response = new FavouriteResponse();
-        public AddFavourite(IFavouriteRepository repository,IFavouriteService favouriteService) {
-            this.favouriteRepository = repository;
+        public AddFavourite(IFavouriteService favouriteService,IAuthService authService) {
+       
             this.favouriteService = favouriteService;
+            this.authService = authService;
         }
-        public FavouriteResponse Add(Favourite favourite) {
-            
-                
+        public async Task Add(string  articleID) {
+
+            User user = authService.GetCurrentUser();
+            Favourite favourite = new Favourite
+            {
+                userID = user.id,
+                articleID= articleID    
+
+            };
                 if (!favouriteService.IsAlreadyAdded(favourite))
                 {
-                    favouriteRepository.Store(favourite);
+                    await favouriteService.Store(favourite);
 
-                response.Message = "You have added an article to you favourite list.";
-                response.code = (int)HttpStatusCode.OK;
-                return response;
                 }
-            response.Message = "You have already added this article to your favourite list.";
-            response.code = (int)HttpStatusCode.Conflict;
-            return response;
+   
               
         }
         

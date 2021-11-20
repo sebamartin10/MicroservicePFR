@@ -3,6 +3,7 @@ using MicroservicePFR.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MicroservicePFR.Infraestructure.Repository
 {
@@ -12,11 +13,11 @@ namespace MicroservicePFR.Infraestructure.Repository
         public SqlServerFavouriteRepository(SqlServerDBContext dbContext) {
             this._dbContext = dbContext;
         }
-        public void Store(Favourite favourite)
+        public async Task Store(Favourite favourite)
         {
             
                 _dbContext.Favourite.Add(favourite);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             
         }
         public bool IsAlreadyAdded(Favourite favourite){
@@ -30,10 +31,10 @@ namespace MicroservicePFR.Infraestructure.Repository
             
         }
 
-        public void Remove(Favourite favourite)
+        public async Task Remove(Favourite favourite)
         {
             _dbContext.Favourite.Remove(favourite);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         public Favourite GetById(string id)

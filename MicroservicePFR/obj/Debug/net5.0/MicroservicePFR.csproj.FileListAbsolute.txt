@@ -58,3 +58,4 @@ C:\Mis Proyectos\Microservicio Perfil, Favoritos y Recomendados\MicroservicePFR\
 C:\Mis Proyectos\Microservicio Perfil, Favoritos y Recomendados\MicroservicePFR\MicroservicePFR\obj\Debug\net5.0\MicroservicePFR.genruntimeconfig.cache
 C:\Mis Proyectos\Microservicio Perfil, Favoritos y Recomendados\MicroservicePFR\MicroservicePFR\bin\Debug\net5.0\libman.json
 C:\Mis Proyectos\Microservicio Perfil, Favoritos y Recomendados\MicroservicePFR\MicroservicePFR\obj\Debug\net5.0\MicroservicePFR.csproj.AssemblyReference.cache
+C:\Mis Proyectos\Microservicio Perfil, Favoritos y Recomendados\MicroservicePFR\MicroservicePFR\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -11,28 +11,40 @@ public class FavouriteService : IFavouriteService
 {
     private IFavouriteRepository favouriteRepository;
     private readonly IHttpClientFactory httpClientFactory;
-
+    private static HttpClient httpClient;
     public FavouriteService(IFavouriteRepository repo,IHttpClientFactory httpClientFactory){
         this.httpClientFactory = httpClientFactory;
+        httpClient = httpClientFactory.CreateClient("Catalog");
         favouriteRepository = repo;
-        
+       
     }
 
-    public async Task<List<Favourite>> GetAllFavouritesFromUser(string userId)
+    public async Task<List<FavouriteDTO>> GetAllFavouritesFromUser(string userId)
     {
-        var httpClient = httpClientFactory.CreateClient("Catalog");
-        var result = await httpClient.GetAsync("/v1/articles/61845b4db9d8210009424228");
-        if (result.IsSuccessStatusCode)
-        {
-            string responseBody = await result.Content.ReadAsStringAsync();
-            var a = JsonConvert.DeserializeObject<ArticleDTO>(responseBody);
-            var article = result.Content.ReadFromJsonAsync<ArticleDTO>();
-        }
         List<Favourite> favourites = favouriteRepository.GetAllUserFavorites(userId);
-        foreach (var favourite in favourites) {
-            
+        List<FavouriteDTO> favouritesDTO = new List<FavouriteDTO>();
+        foreach (var favourite in favourites)
+        {
+            var result = await httpClient.GetAsync("/v1/articles/"+favourite.articleID);
+            if (result.IsSuccessStatusCode)
+            {
+                string responseBody = await result.Content.ReadAsStringAsync();
+                var article = JsonConvert.DeserializeObject<ArticleDTO>(responseBody);
+                favouritesDTO.Add(new FavouriteDTO
+                {
+                    articleId= article._id,
+                    articleName = article.name,
+                    articleDescription = article.description,
+                    articleImage = article.image,
+                    articlePrice = article.price.ToString(),
+                });
+            }
         }
-        return favouriteRepository.GetAllUserFavorites(userId);
+
+
+
+
+        return favouritesDTO;
     }
 
     public Favourite GetFavourite(string id)
@@ -47,14 +59,14 @@ public class FavouriteService : IFavouriteService
         return false;
     }
 
-    public void Remove(Favourite favourite)
+    public async Task Remove(Favourite favourite)
     {
-        favouriteRepository.Remove(favourite);
+        await favouriteRepository.Remove(favourite);
     }
 
-    public void Store(Favourite favourite)
+    public async Task Store(Favourite favourite)
     {
-        favouriteRepository.Store(favourite);
+        await favouriteRepository.Store(favourite);
     }
     
 

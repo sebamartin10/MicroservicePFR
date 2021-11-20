@@ -14,16 +14,27 @@ namespace MicroservicePFR.Infraestructure.Controllers
         private readonly SqlServerDBContext dbContext;
         IUserProfileRepository userProfileRepository;
         IUserProfileService userProfileService;
-        public UserProfileController(SqlServerDBContext dbContext,IUserProfileRepository repo, IUserProfileService service) {
+        IAuthService authService;
+        public UserProfileController(SqlServerDBContext dbContext,IUserProfileRepository repo, IUserProfileService service,IAuthService authService) {
             this.dbContext = dbContext;
             this.userProfileRepository = repo;
             this.userProfileService = service;
+            this.authService = authService; 
         }
 
         [HttpPost]
-        public void Update(UserProfile user) {
+        public ActionResult Update(UserProfile user) {
+            var requestHeader = Request.Headers.TryGetValue("Authorization", out var token);
+            Auth.bearerToken = token;
+            if (!authService.IsAuthorized())
+            {
+                return Unauthorized();
+            }
+
+           
             UpdateUser updateUser = new UpdateUser(userProfileRepository,userProfileService);
             updateUser.Update(user);
+            return Ok();
         }
         
     }

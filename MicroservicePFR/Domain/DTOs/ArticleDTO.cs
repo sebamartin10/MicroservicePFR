@@ -11,5 +11,6 @@
         public string updated { get; set; }
         public string created { get; set; }
         public string enabled { get; set; }
+        public string category { get; set; }
     }
 }

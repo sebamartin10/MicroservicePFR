@@ -30,10 +30,15 @@ namespace MicroservicePFR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRecommendedService, RecommendedService>();
+            services.AddScoped<IRecommendedRepository, SqlServerRecommendedRepository>();
+            services.AddScoped<IInterestCategoryRepository, SqlServerInterestCategoryRepository>();
+            services.AddScoped<IInterestCategoryService, InterestCategoryService>();
             services.AddScoped<IUserProfileRepository, SqlServerUserProfileRepository>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IFavouriteRepository, SqlServerFavouriteRepository>();
             services.AddScoped<IFavouriteService, FavouriteService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddDbContext<SqlServerDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddControllers();
@@ -44,7 +49,10 @@ namespace MicroservicePFR
             services.AddHttpClient("Catalog",client => {
                 client.BaseAddress = new Uri("http://localhost:3002");
             });
-            
+            services.AddHttpClient("Auth", client => {
+                client.BaseAddress = new Uri("http://localhost:3000");
+            });
+
 
 
         }

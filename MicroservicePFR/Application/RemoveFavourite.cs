@@ -3,6 +3,7 @@ using MicroservicePFR.Domain.Models.Exceptions;
 using MicroservicePFR.Domain.Repository;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace MicroservicePFR.Application
 {
@@ -15,18 +16,17 @@ namespace MicroservicePFR.Application
             favouriteRepository = repo;
             favouriteService = service;
         }
-        public FavouriteResponse Remove(string articleID)
+        public async Task Remove(string articleID)
         {
             Favourite favourite = favouriteService.GetFavourite(articleID);
             if (favourite != null)
             {
-                favouriteRepository.Remove(favourite);
-                favouriteResponse.Message = "You have deleted an article from your favourite list.";
-                favouriteResponse.code = (int)HttpStatusCode.OK;
-                return favouriteResponse;
+                await favouriteService.Remove(favourite);
+            
+                
             }
             else {
-                favouriteResponse.Message = "Favourite not found.";
+                
                 throw new NotFoundException("Favourite not found");
             }
         }
