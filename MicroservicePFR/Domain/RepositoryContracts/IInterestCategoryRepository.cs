@@ -1,7 +1,7 @@
 ﻿using MicroservicePFR.Domain.Models;
 using System.Threading.Tasks;
 
-namespace MicroservicePFR.Domain.Repository
+namespace MicroservicePFR.Domain.RepositoryContracts
 {
     public interface IInterestCategoryRepository
     {

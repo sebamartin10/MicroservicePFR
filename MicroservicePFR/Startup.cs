@@ -1,4 +1,4 @@
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using MicroservicePFR.Infraestructure.Repository;
 using MicroservicePFR.Services;
 using Microsoft.AspNetCore.Builder;

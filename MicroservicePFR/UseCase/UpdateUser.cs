@@ -1,8 +1,8 @@
 ﻿using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using MicroservicePFR.Services;
 
-namespace MicroservicePFR.Application
+namespace MicroservicePFR.UseCase
 {
     public class UpdateUser
     {

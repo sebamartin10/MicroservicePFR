@@ -1,5 +1,5 @@
 using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;

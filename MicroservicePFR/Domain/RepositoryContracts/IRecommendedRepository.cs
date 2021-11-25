@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MicroservicePFR.Domain.Repository
+namespace MicroservicePFR.Domain.RepositoryContracts
 {
     public interface IRecommendedRepository
     {

@@ -1,6 +1,6 @@
 ﻿using MicroservicePFR.Domain.DTOs;
 using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

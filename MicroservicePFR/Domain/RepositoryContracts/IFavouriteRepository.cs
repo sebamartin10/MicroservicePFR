@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroservicePFR.Domain.Repository
+namespace MicroservicePFR.Domain.RepositoryContracts
 {
     public interface IFavouriteRepository
     {

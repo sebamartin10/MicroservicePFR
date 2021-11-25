@@ -1,8 +1,9 @@
-﻿using MicroservicePFR.Application;
+﻿
 using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using MicroservicePFR.Infraestructure.Repository;
 using MicroservicePFR.Services;
+using MicroservicePFR.UseCase;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroservicePFR.Infraestructure.Controllers

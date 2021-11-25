@@ -1,6 +1,6 @@
 ﻿using MicroservicePFR.Domain.Models;
 
-namespace MicroservicePFR.Domain.Repository
+namespace MicroservicePFR.Domain.RepositoryContracts
 {
     public interface IUserProfileRepository
     {

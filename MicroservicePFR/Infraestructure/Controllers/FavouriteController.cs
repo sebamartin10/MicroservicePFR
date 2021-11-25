@@ -1,8 +1,9 @@
-﻿using MicroservicePFR.Application;
+﻿
 using MicroservicePFR.Domain.DTOs;
 using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using MicroservicePFR.Services;
+using MicroservicePFR.UseCase;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,10 @@
 ﻿using MicroservicePFR.Domain.DTOs;
 using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroservicePFR.Application
+namespace MicroservicePFR.UseCase
 {
     public class GetAllFavouritesFromUser
     {

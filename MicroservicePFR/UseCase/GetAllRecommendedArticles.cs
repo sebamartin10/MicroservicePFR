@@ -3,7 +3,7 @@ using MicroservicePFR.Domain.Models;
 using MicroservicePFR.Services;
 using System.Collections.Generic;
 
-namespace MicroservicePFR.Application
+namespace MicroservicePFR.UseCase
 {
     public class GetAllRecommendedArticles
     {

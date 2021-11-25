@@ -1,5 +1,5 @@
 ﻿using MicroservicePFR.Domain.Models;
-using MicroservicePFR.Domain.Repository;
+using MicroservicePFR.Domain.RepositoryContracts;
 using System.Net.Http;
 using System.Threading.Tasks;
 
